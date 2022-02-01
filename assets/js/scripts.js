@@ -1,26 +1,35 @@
 var currentNumberWrapper = document.getElementById("currentNumber");
 var currentNumber = 0;
 
-function increment() {    
+_updateButtonsDisabledState();
+
+function increment() {
     currentNumber = currentNumber + 1;
-    currentNumberWrapper.innerHTML = currentNumber;   
+    currentNumberWrapper.innerHTML = currentNumber;
+
+    _updateButtonsDisabledState();
 }
 
 function decrement() {
     currentNumber = currentNumber - 1;
     currentNumberWrapper.innerHTML = currentNumber;
-}   
 
-if (currentNumber >= 10) {
-    document.getElementById("buttonadd").disabled=true;
-}
-    else {
-        document.getElementById("buttonadd").disabled=false;
+    _updateButtonsDisabledState();
 }
 
-if (currentNumber <= 0) {
-    document.getElementById("buttonsub").disabled=true;
+function _updateButtonsDisabledState() {
+    var isAddDisabled = currentNumber >= 10;
+    document.getElementById('buttonadd').disabled = isAddDisabled;
+    var isSubDisabled = currentNumber <= 0;
+    document.getElementById('buttonsub').disabled = isSubDisabled;
+
 }
-    else {
-        document.getElementById("buttonsub").disabled=false;
-}
+
+var eladd = document.getElementById("buttonadd");
+
+eladd.addEventListener("click", increment);
+
+var elsub = document.getElementById("buttonsub");
+
+elsub.addEventListener("click", decrement);
+
